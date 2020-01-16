@@ -1,25 +1,22 @@
-t <- read.table("household_power_consumption.txt", header=TRUE, sep=";", na.strings = "?", colClasses = c('character','character','numeric','numeric','numeric','numeric','numeric','numeric','numeric'))
+#Assignment 1 :Exploratory Data Analysis
+#Instruction  :Our overall goal here is simply to examine how household energy usage varies over 
+#              a 2-day period in February, 2007. Your task is to reconstruct the following plots 
+#              below, all of which were constructed using the base plotting system
 
-## Format date to Type Date
-t$Date <- as.Date(t$Date, "%d/%m/%Y")
 
-## Filter data set from Feb. 1, 2007 to Feb. 2, 2007
-t <- subset(t,Date >= as.Date("2007-2-1") & Date <= as.Date("2007-2-2"))
+# Loading the data
+main_data <- read.table("household_power_consumption.txt", header=TRUE, sep=";", na.strings = "?", colClasses = c('character','character','numeric','numeric','numeric','numeric','numeric','numeric','numeric'))
+summary(main_data)
 
-## Remove incomplete observation
-t <- t[complete.cases(t),]
+#Subset the data from the dates 2007-02-01 and 2007-02-02
 
-## Combine Date and Time column
-dateTime <- paste(t$Date, t$Time)
+subsetdata <- main_data[main_data$Date %in% c("1/2/2007","2/2/2007"),]
 
-## Name the vector
-dateTime <- setNames(dateTime, "DateTime")
+globalActivePower <- as.numeric(subsetdata$Global_active_power)
+globalReactivePower <- as.numeric(subsetdata$Global_reactive_power)
+voltage <- as.numeric(subsetdata$Voltage)
+subMetering1 <- as.numeric(subsetdata$Sub_metering_1)
+subMetering2 <- as.numeric(subsetdata$Sub_metering_2)
+subMetering3 <- as.numeric(subsetdata$Sub_metering_3)
 
-## Remove Date and Time column
-t <- t[ ,!(names(t) %in% c("Date","Time"))]
 
-## Add DateTime column
-t <- cbind(dateTime, t)
-
-## Format dateTime Column
-t$dateTime <- as.POSIXct(dateTime)
