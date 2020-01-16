@@ -1,5 +1,7 @@
-## Create Plot 2
-plot(t$Global_active_power~t$dateTime, type="l", ylab="Global Active Power (kilowatts)", xlab="")
+## Create a Time Series Graph
 
-#dev.copy(png,"plot2.png", width=480, height=480)
-#dev.off()
+datetime <- strptime(paste(subsetdata$Date, subsetdata$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
+plot(datetime, globalActivePower, type="l", xlab="", ylab="Global Active Power (kilowatts)")
+
+dev.copy(png,"plot2.png", width=480, height=480)
+dev.off()
