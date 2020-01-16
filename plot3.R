@@ -1,13 +1,13 @@
-## Create Plot 3
-with(t, {
-  plot(Sub_metering_1~dateTime, type="l",
-       ylab="Global Active Power (kilowatts)", xlab="")
-  lines(Sub_metering_2~dateTime,col='Red')
-  lines(Sub_metering_3~dateTime,col='Blue')
-})
-legend("topright", col=c("black", "red", "blue"), lwd=c(1,1,1), 
-       c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+## Create a Plot for Sub-Metering
 
-## Saving to file
-#dev.copy(png, file="plot3.png", height=480, width=480)
-#dev.off()
+plot(datetime, subMetering1, type="l", ylab="Energy Sub Metering", xlab="")
+lines(datetime, subMetering2, col="red")
+lines(datetime, subMetering3,  col="blue")
+#legend("topright", col=c("black", "red", "blue"), lwd= c(1,1,1), c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3") )
+
+legend("topright", col=c("black", "red", "blue"), lwd=2.5, 
+       c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), cex = 0.3, lty = 1)
+
+## Saving to file 
+dev.copy(png, file="plot3.png", height=480, width=480)
+dev.off()
